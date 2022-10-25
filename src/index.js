@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom/client';
-import {Posts, Login} from './Components/index';
+import {Posts, Register, LogIn, Logout} from './Components/index';
 import { fetchPosts } from './api/Requests.js';
 
 
@@ -8,6 +8,9 @@ import { fetchPosts } from './api/Requests.js';
 
 const App = () => {
   const [posts, setPosts] = useState([]);
+  const [token, setToken] = useState(
+    window.localStorage.getItem("token") || null
+  );
   useEffect( ()=> {
     const getPosts = async () => {
       const {error, posts_value} = await fetchPosts();
@@ -19,7 +22,7 @@ const App = () => {
     console.log("got to getPosts() call");
     getPosts();
   }, [])
-  return <> <Login></Login><Posts posts={posts}> </Posts></>
+  return <> <inline><Logout setToken= {setToken}></Logout><Register setToken={setToken}></Register><LogIn setToken={setToken}></LogIn></inline><Posts posts={posts}> </Posts></>
 
 };
 
