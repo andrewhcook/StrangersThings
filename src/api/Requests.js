@@ -111,3 +111,9 @@ export const logInUser = async (username, password) => {
   }
 }
 
+export const isLoggedIn = (token = null) => {
+  if (token) {return true} else {
+    return false
+  }
+}
+

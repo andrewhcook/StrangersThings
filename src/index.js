@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom/client';
-import {Posts, Register, LogIn, Logout} from './Components/index';
+import { Route, Switch, Link} from "react-router-dom";
+import {Posts, Register, LogIn, Logout, Home} from './Components/index';
 import { fetchPosts } from './api/Requests.js';
 
 
@@ -22,8 +23,10 @@ const App = () => {
     console.log("got to getPosts() call");
     getPosts();
   }, [])
+  // make the nav bar then make the rest of the UI.
+  // use router to show the appropriate view
+  // vvvv THIS IS A PLACEHOLDER TO ENSURE INDIVIDUAL COMPONENTS DISPLAY PROPERLY vvvv//
   return <> <inline><Logout setToken= {setToken}></Logout><Register setToken={setToken}></Register><LogIn setToken={setToken}></LogIn></inline><Posts posts={posts}> </Posts></>
-
 };
 
 const root = ReactDOM.createRoot(document.getElementById('app'));
