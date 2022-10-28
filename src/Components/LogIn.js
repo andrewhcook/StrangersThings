@@ -1,19 +1,29 @@
 import React, {useState} from 'react'
 
-import { logInUser } from "../api/Requests";
+import { logInUser, fetchUser} from "../api/Requests";
 
-const LogIn = ({setToken}) => {
+const LogIn = (props) => {
+    const {setToken, setUser} = props
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
     const onSubmitHandler = async (event) => {
-        console.log("onSubmitHandler() called");
+        console.log("onSubmitHandler() in Login called");
         event.preventDefault();
         const {error, token, message} = await logInUser(username, password);
         setToken(token);
+        const getUser = async () => {
+            console.log("getUser() called");
+            const {error, user} = await fetchUser();
+            if (error) {
+              console.error(error);
+            }
+            setUser(user); 
+          };
+          getUser();
     }
 
-
+//fix this form
     return (<form className="login-form" onSubmit={onSubmitHandler}>
         <h1>Login Form</h1>
         <div className="field">

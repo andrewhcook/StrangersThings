@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Switch, Link} from 'react-router-dom';
-import {Posts, Register, LogIn, Logout, Home} from './Components/index';
-import { fetchPosts } from './api/Requests.js';
+import {Posts, Register, LogIn, Logout, Home, CreatePostForm} from './Components/index';
+import { fetchPosts, fetchUser } from './api/Requests.js';
 
 
 
@@ -12,13 +12,13 @@ const App = () => {
   const [token, setToken] = useState(
     window.localStorage.getItem("token") || null
   );
+  const [user,setUser] = useState({});
   useEffect( ()=> {
     const getPosts = async () => {
       const {error, posts_value} = await fetchPosts();
     if (error) {
       console.error(error);
     }
-    console.log("posts_value", posts_value);
     setPosts(posts_value);};
     console.log("got to getPosts() call");
     getPosts();
@@ -37,13 +37,13 @@ const App = () => {
         <div id = "nav-bar">
           <Link to ="/Home">Home</Link>
           <Link to = "/Posts">Posts</Link>
-          <Link to = "/LogIn">Login</Link>
+         {token ? <Logout setToken={setToken}></Logout> : <Link to = "/LogIn">Login/Register</Link>} 
 
 
         </div>
       <div id = "main-section">
       <Route path = "/Login">
-        <LogIn setToken = {setToken}></LogIn>
+        <LogIn setToken = {setToken} setUser = {setUser}></LogIn>
         <div>Not a user? Register Below: </div>
         <Register setToken={setToken}></Register>
         </Route>
@@ -52,9 +52,8 @@ const App = () => {
         </Route>
         <Route path = "/Home">
           { token ? <>
-          <Logout setToken={setToken}></Logout>
-          <Home></Home>
-          <div>Placeholder for createPosts</div> </>: null}
+          <Home guest = {user}></Home>
+          <aside><CreatePostForm token = {token} setPosts = {setPosts} posts = {posts}></CreatePostForm></aside> </>: null}
           <Posts posts = {posts}></Posts>
         </Route>
     </div>

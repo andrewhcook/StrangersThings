@@ -5,7 +5,7 @@ const Home = ({guest}) => {
     return (
         <>
         <h1>Welcome to Strangers' Things</h1>
-        guest ? <h2>You are logged in as {guest.username}</h2> : null
+        {guest ? <h2>You are logged in as {guest.username}</h2> : null}
         </>
     )
 }

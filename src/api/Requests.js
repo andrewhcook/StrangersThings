@@ -94,6 +94,7 @@ export const logInUser = async (username, password) => {
         mesage: data.message
       }
     } else {
+      alert("Incorrect User Credentials");
       console.log("no success in registerUser()", error);
       return {
         error: error.message,
@@ -117,3 +118,56 @@ export const isLoggedIn = (token = null) => {
   }
 }
 
+export const CreatePost = async (token, post) => {
+  try {
+    const {success, error, data} = await apiCall('posts', {token: token, method: "Post", body: {post: post}} );
+    if (success) {
+      return {
+        error: null,
+        post: data.post,
+        mesage: data.message
+      }
+    } else {
+      console.log("error in CreatePost", error.message);
+      return {
+        error: error.message,
+        post: null,
+        message: null
+      }
+    }
+  } catch (error){
+    console.error(error);
+    return {
+      error: "error in CreatePost() call",
+      post: null,
+      message: null
+    }
+  }
+}
+
+export const fetchUser = async () => {
+  try {
+    console.log("fetchUser() called");
+    const {success, error, data} = await apiCall('users/me');
+    if (success) {
+      return {
+        error: null,
+        user: data.user,
+        mesage: data.message
+      }
+    } else {
+      return {
+        error: error.message,
+        post: null,
+        message: null
+      }
+    }
+  } catch (error){
+    console.error(error);
+    return {
+      error: "error in FetchUser() call",
+      post: null,
+      message: null
+    }
+  }
+}
