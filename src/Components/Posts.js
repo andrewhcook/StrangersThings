@@ -30,7 +30,7 @@ const Posts =  (props) => {
     console.log(response);
     
     return <div className="posts"> {
-        response.reverse().map((item)=> {return post(item, userToken)})
+        response.map((item)=> {return post(item, userToken)})
     }</div>
 
 

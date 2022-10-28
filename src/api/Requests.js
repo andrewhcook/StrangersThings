@@ -145,10 +145,10 @@ export const CreatePost = async (token, post) => {
   }
 }
 
-export const fetchUser = async () => {
+export const fetchUser = async (token) => {
   try {
     console.log("fetchUser() called");
-    const {success, error, data} = await apiCall('users/me');
+    const {success, error, data} = await apiCall('users/me', {token:token});
     if (success) {
       return {
         error: null,

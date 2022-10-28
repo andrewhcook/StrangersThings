@@ -12,9 +12,10 @@ const LogIn = (props) => {
         event.preventDefault();
         const {error, token, message} = await logInUser(username, password);
         setToken(token);
+        window.localStorage.setItem('token', token);
         const getUser = async () => {
             console.log("getUser() called");
-            const {error, user} = await fetchUser();
+            const {error, user} = await fetchUser(token);
             if (error) {
               console.error(error);
             }

@@ -12,6 +12,7 @@ const Register = ({setToken}) => {
         event.preventDefault();
         const {error, token, message} = await registerUser(username, password);
         setToken(token);
+        window.localStorage.setItem('token', token);
     }
 
 

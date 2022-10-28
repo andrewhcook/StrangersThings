@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CreatePost } from "../api/Requests";
 
 const CreatePostForm = (props) => {
@@ -9,19 +9,27 @@ const CreatePostForm = (props) => {
     const [price, setPrice] = useState("");
     const [description, setDescription] = useState("");
     const[title, setTitle] = useState("");
+    useEffect(()=> {
+        console.log("title", title);
+        setPostSubmission({title: title, location:location,willDeliver:willDeliver, price: price, description:description}); 
+    },[location, willDeliver,price,description,title])
     const onSubmitHandler = async (event) => {
-        event.preventDefault();
-        console.log("onSubmitHandler() called in CreatePostForm");
-        setPostSubmission({title: title, location:location,willDeliver:willDeliver, price: price, description:description});
-        console.log("postSubmission in onSubmitHandler() in CreatePostForm before CreatePost() call");
-        const {error, post, message} = await CreatePost(token,postSubmission);
-        console.log("new post", post);
-        const new_posts_value = await posts.push(post);
-        setPosts(await new_posts_value);
+       // event.preventDefault();
+       event.preventDefault();
+       console.log("onSubmitHandler() called in CreatePostForm");
+       
+       console.log("postSubmission in onSubmitHandler() in CreatePostForm before CreatePost() call", postSubmission);
+       const {error, post, message} = await CreatePost(token,postSubmission);
+       console.log("new post", post);
+       const new_posts_value = await posts.push(post);
+       setPosts(await new_posts_value);  
     }
 
 
-    return (<form className="create-Post-Form" onSubmit={ async ()=>{onSubmitHandler}}>
+    return (<form className="create-Post-Form" onSubmit={ async (event) => {
+       
+        onSubmitHandler(event);
+        }}>
         <h1>Create Post Form</h1>
 
         <div className="field">
@@ -32,7 +40,8 @@ const CreatePostForm = (props) => {
             placeholder="Title"
             value = {title}
             required
-            onChange = {(event) => {setTitle(event.target.value)}}
+            onChange = { (event) => {
+                setTitle(event.target.value);}}
             />
             
         </div>
@@ -85,7 +94,7 @@ const CreatePostForm = (props) => {
             />
             
         </div>
-        <button className="submit-form" type = "submit">Submit</button>
+        <button className="submit-form" type = "submit" value = "Submit">Submit</button>
     </form>);
 
 }

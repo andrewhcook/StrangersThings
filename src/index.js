@@ -19,7 +19,7 @@ const App = () => {
     if (error) {
       console.error(error);
     }
-    setPosts(posts_value);};
+    setPosts(posts_value.reverse());};
     console.log("got to getPosts() call");
     getPosts();
   }, [])
