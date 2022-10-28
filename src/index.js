@@ -23,14 +23,12 @@ const App = () => {
     console.log("got to getPosts() call");
     getPosts();
   }, [])
-  // make the nav bar then make the rest of the UI.
-  // use router to show the appropriate view
+  //  x make the nav bar then make the rest of the UI.
+  // x use router to show the appropriate view
+  // add a Profile view upon login which displays messages
   // NAV BAR on top >> login component shows below nav bar upon first load >> posts in center below nav bar and home component>>
   // Home message 
-  // vvvv THIS IS A PLACEHOLDER TO ENSURE INDIVIDUAL COMPONENTS DISPLAY PROPERLY vvvv//
-
-    //return <> <inline><Logout setToken= {setToken}></Logout><Register setToken={setToken}></Register><LogIn setToken={setToken}></LogIn></inline><Posts posts={posts}> </Posts></>
-    // ^^^ delete after line below is complete
+  
     return(
       <BrowserRouter>
       <div id = "container">

@@ -21,7 +21,7 @@ const CreatePostForm = (props) => {
     }
 
 
-    return (<form className="Create-Post-Form" onSubmit={ async ()=>{onSubmitHandler}}>
+    return (<form className="create-Post-Form" onSubmit={ async ()=>{onSubmitHandler}}>
         <h1>Create Post Form</h1>
 
         <div className="field">

@@ -24,3 +24,6 @@ body {
 .description{ 
     font-size: 12pt ;
 }
+.create-post-form {
+    border: 10px solid blue
+}
