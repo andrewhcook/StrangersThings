@@ -8,6 +8,7 @@ import { fetchPosts, fetchUser } from './api/Requests.js';
 
 
 const App = () => {
+  const [reloadItem, setReloadItem] = useState(false);
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(
     window.localStorage.getItem("token") || null
@@ -22,7 +23,7 @@ const App = () => {
     setPosts(posts_value.reverse());};
     console.log("got to getPosts() call");
     getPosts(token);
-  }, [token])
+  },[reloadItem])
   //  x make the nav bar then make the rest of the UI.
   // x use router to show the appropriate view
   // add a Profile view upon login which displays messages
@@ -46,13 +47,13 @@ const App = () => {
         <Register setToken={setToken}></Register>
         </Route>
         <Route path = "/Posts">
-          <Posts posts= {posts}></Posts>
+        <Posts posts = {posts} token = {token} setPosts = {setPosts} reloadItem = {reloadItem} setReloadItem = {setReloadItem}></Posts>
         </Route>
         <Route path = "/Home">
           { token ? <>
           <Home guest = {user}></Home>
-          <aside><CreatePostForm token = {token} setPosts = {setPosts} posts = {posts}></CreatePostForm></aside> </>: null}
-          <Posts posts = {posts}></Posts>
+          <aside><CreatePostForm token = {token} setPosts = {setPosts} posts = {posts} reloadItem = {reloadItem} setReloadItem = {setReloadItem}></CreatePostForm></aside> </>: null}
+          <Posts posts = {posts} token = {token} setPosts = {setPosts} reloadItem = {reloadItem} setReloadItem = {setReloadItem}></Posts>
         </Route>
     </div>
     </div>

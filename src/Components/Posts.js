@@ -1,6 +1,6 @@
+import { DeletePost } from "../api/Requests";
 
-
-const post = (itemInfo) => {
+const post = (itemInfo, token, reloadItem, setReloadItem) => {
 
     return itemInfo.isAuthor ?  <><div className="post">
     <div className="post-item"> Post: {itemInfo.title}</div>
@@ -9,7 +9,8 @@ const post = (itemInfo) => {
     <div className="post-item">Location: {itemInfo.location}</div>
     <div className= "post-item description">Description: {itemInfo.description}</div>
     <div className="post-item messages">Messages: {itemInfo.messages}</div>
-    <div></div> 
+    <button className="post-item delete-post" onClick={async() =>{DeletePost(token, itemInfo._id);
+    setReloadItem(!reloadItem)}}>Delete Post</button>
 </div> </>: <><div className="post">
         <div className="post-item"> Post: {itemInfo.title}</div>
         <div className="post-item">Author: {itemInfo.author.username}</div>
@@ -26,10 +27,13 @@ const Posts =  (props) => {
 
     
     const response = props.posts;
+    const token = props.token;
+    const reloadItem = props.reloadItem;
+    const setReloadItem = props.setReloadItem;
     console.log(response);
     
     return <div className="posts"> {
-        response.map((item)=> {return post(item)})
+        response.map((item)=> {return post(item, token, reloadItem, setReloadItem)})
     }</div>
 
 

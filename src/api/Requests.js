@@ -171,3 +171,9 @@ export const fetchUser = async (token) => {
     }
   }
 }
+
+export const DeletePost = async (token, POST_ID) => {
+  console.log("DeletePost() called");
+  await apiCall(`posts/${POST_ID}`, {token:token, method: "DELETE"});
+   
+}

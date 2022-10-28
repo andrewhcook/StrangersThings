@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { CreatePost } from "../api/Requests";
 
 const CreatePostForm = (props) => {
-    const {token, setPosts, posts} = props
+    const {token, setPosts, posts, reloadItem, setReloadItem} = props
     const [postSubmission, setPostSubmission] = useState({});
     const [location, setLocation] = useState("");
     const [willDeliver, setWillDeliver] = useState("false");
@@ -21,8 +21,9 @@ const CreatePostForm = (props) => {
        console.log("postSubmission in onSubmitHandler() in CreatePostForm before CreatePost() call", postSubmission);
        const {error, post, message} = await CreatePost(token,postSubmission);
        console.log("new post", post);
-       const new_posts_value = await posts.push(post);
-       setPosts(await new_posts_value);  
+       setReloadItem(!reloadItem);
+      /*  const new_posts_value = posts.push(post);
+       setPosts(new_posts_value);   */
     }
 
 
