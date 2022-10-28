@@ -35,8 +35,8 @@ export const apiCall = async (endpoint, defaultOptions= {}) => {
     return result;
 }
 
-export const fetchPosts = async ()=> {
-  const {success, error, data} = await apiCall('posts');
+export const fetchPosts = async (token = null)=> {
+  const {success, error, data} = await apiCall('posts', {token:token, method:"GET"});
   console.log("data: ", data.posts);
   if (success) {
     console.log("success! in fetchPosts()");

@@ -1,8 +1,8 @@
 
 
-const post = (itemInfo, userToken) => {
+const post = (itemInfo) => {
 
-    return userToken ?  <><div className="post">
+    return itemInfo.isAuthor ?  <><div className="post">
     <div className="post-item"> Post: {itemInfo.title}</div>
     <div className="post-item">Author: {itemInfo.author.username} (You)</div>
     <div className="post-item">Price: {itemInfo.price}</div>
@@ -26,11 +26,10 @@ const Posts =  (props) => {
 
     
     const response = props.posts;
-    const userToken = props.token;
     console.log(response);
     
     return <div className="posts"> {
-        response.map((item)=> {return post(item, userToken)})
+        response.map((item)=> {return post(item)})
     }</div>
 
 

@@ -14,15 +14,15 @@ const App = () => {
   );
   const [user,setUser] = useState({});
   useEffect( ()=> {
-    const getPosts = async () => {
-      const {error, posts_value} = await fetchPosts();
+    const getPosts = async (token) => {
+      const {error, posts_value} = await fetchPosts(token);
     if (error) {
       console.error(error);
     }
     setPosts(posts_value.reverse());};
     console.log("got to getPosts() call");
-    getPosts();
-  }, [])
+    getPosts(token);
+  }, [token])
   //  x make the nav bar then make the rest of the UI.
   // x use router to show the appropriate view
   // add a Profile view upon login which displays messages
