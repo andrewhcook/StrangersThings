@@ -19,10 +19,19 @@ const post = (itemInfo, token, reloadItem, setReloadItem, message, setMessage) =
         <div className= "post-item description">Description: {itemInfo.description}</div>
         {token ? <form onSubmit = {async () => {SendMessage(token,itemInfo._id, message);
         setReloadItem(!reloadItem);}}>
-            <input type = "text" onChange = {()=> {setMessage(message)}}></input> <button > Send Message </button> </form>: null}
+            <input type = "text" onChange = {(event)=> {setMessage(event.target.value)}}></input> <button type = "submit"> Send Message </button> </form>: null}
     </div> </>
     }
 
+
+
+
+const searchForm = (searchTerm, setSearchTerm) => {
+    
+
+  return <input  type="text"  value = {searchTerm}  onChange = {(event)=> {
+    setSearchTerm(event.target.value);}}></input>
+}
 
 const Posts =  (props) => {
 
@@ -33,10 +42,32 @@ const Posts =  (props) => {
     const reloadItem = props.reloadItem;
     const setReloadItem = props.setReloadItem;
     console.log(response);
-    
-    return <div className="posts"> {
-        response.map((item)=> {return post(item, token, reloadItem, setReloadItem, message, setMessage)})
-    }</div>
+
+    const [searchTerm, setSearchTerm] = useState("");
+
+    function postMatches(post, text) {
+        // return true if any of the fields you want to check against include the text
+        // strings have an .includes() method 
+        if (!text) {
+          return true 
+        }
+        if (post.title.includes(text)) {
+          return true
+        }
+        if (post.description.includes(text)) {
+            return true
+          }
+        if (post.price.includes(text)) {
+        return true
+          }
+        if (post.author.username.includes(text)) {
+        return true
+        }
+        return false
+      }
+      
+      const filteredPosts = response.filter(post => postMatches(post, searchTerm));
+    return   <><div> {searchForm(searchTerm,setSearchTerm)} </div><div className='posts'> {filteredPosts.map((item) => { return post(item, token, reloadItem, setReloadItem, message, setMessage); })}</div></>
 
 
 }
