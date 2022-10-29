@@ -14,13 +14,13 @@ const makeHeaders = (token) => {
   if (token) {
     headers['Authorization'] = `Bearer ${token}`;
   }
-
+  console.log(headers);
   return headers;
 };
 
 export const apiCall = async (endpoint, defaultOptions= {}) => {
   const {token, method, body} = defaultOptions;
-  console.log("body in apiCall", body);
+  
   const options = {};
   options.headers = makeHeaders(token);
   if (method) {
@@ -29,6 +29,7 @@ export const apiCall = async (endpoint, defaultOptions= {}) => {
   if (body) {
     options.body = JSON.stringify(body);
   }
+  console.log("body in apiCall", options.body);
     console.log("options in apiCall", options);
     const response = await fetch(`${BASEURL}/${endpoint}`, options);
     const result = await response.json();
@@ -179,7 +180,11 @@ export const DeletePost = async (token, POST_ID) => {
    
 }
 
-export const SendMessage = async (token, POST_ID, message) => {
+export const SendMessage = async (token, POST_ID, content) => {
   console.log("SendMessage() called");
-  await apiCall(`posts/${POST_ID}/messages`, {token: token, body:message})
+  console.log(content);
+  const {success, error, data} = await apiCall(`posts/${POST_ID}/messages`, {token: token, method: "POST", body: {message:{ content: content}}})
+  if (error) {
+    console.log(error);
+  }
 }

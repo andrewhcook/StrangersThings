@@ -2,14 +2,15 @@ import React, {useState, useEffect} from 'react';
 import { DeletePost, SendMessage } from "../api/Requests";
 
 const post = (itemInfo, token, reloadItem, setReloadItem, message, setMessage) => {
+  //console.log(token);
     return itemInfo.isAuthor ?  <><div className="post">
     <div className="post-item"> Post: {itemInfo.title}</div>
     <div className="post-item">Author: {itemInfo.author.username} (You)</div>
     <div className="post-item">Price: {itemInfo.price}</div>
     <div className="post-item">Location: {itemInfo.location}</div>
     <div className= "post-item description">Description: {itemInfo.description}</div>
-    <div className="post-item messages">Messages: {itemInfo.messages}</div>
-    <button className="post-item delete-post" onClick={async() =>{DeletePost(token, itemInfo._id);
+    <div className="post-item messages">  Messages:{itemInfo.messages ? <>{itemInfo.messages.map((item)=> {return <div className="message-on-posting">User: {item.fromUser.username} writes: {item.content}</div>})}</>: null}</div>
+    <button className="delete-post" onClick={async() =>{DeletePost(token, itemInfo._id);
     setReloadItem(!reloadItem)}}>Delete Post</button>
 </div> </>: <><div className="post">
         <div className="post-item"> Post: {itemInfo.title}</div>
@@ -18,7 +19,7 @@ const post = (itemInfo, token, reloadItem, setReloadItem, message, setMessage) =
         <div className="post-item">Location: {itemInfo.location}</div>
         <div className= "post-item description">Description: {itemInfo.description}</div>
         {token ? <form onSubmit = {async () => {SendMessage(token,itemInfo._id, message);
-        setReloadItem(!reloadItem);}}>
+        }}>
             <input type = "text" onChange = {(event)=> {setMessage(event.target.value)}}></input> <button type = "submit"> Send Message </button> </form>: null}
     </div> </>
     }
@@ -67,7 +68,7 @@ const Posts =  (props) => {
       }
       
       const filteredPosts = response.filter(post => postMatches(post, searchTerm));
-    return   <><div> {searchForm(searchTerm,setSearchTerm)} </div><div className='posts'> {filteredPosts.map((item) => { return post(item, token, reloadItem, setReloadItem, message, setMessage); })}</div></>
+    return  (searchTerm === "" && filteredPosts) ? <><div> {searchForm(searchTerm,setSearchTerm)} </div><div className='posts'> {filteredPosts.map((item) => { return post(item, token, reloadItem, setReloadItem, message, setMessage); })}</div></>: <><div> {searchForm(searchTerm, setSearchTerm)} </div><div>No Search Results Found</div></>
 
 
 }

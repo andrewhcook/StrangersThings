@@ -14,7 +14,9 @@ const Register = (props) => {
         const {error, token, message} = await registerUser(username, password);
         setToken(token);
         window.localStorage.setItem('token', token);
+        console.log("reload item pre in onSubmitHandler() in Register", reloadItem);
         setReloadItem(!reloadItem);
+        console.log("reload item post in onSubmitHandler() in Register", reloadItem);
     }
 
 

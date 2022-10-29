@@ -27,7 +27,7 @@ const CreatePostForm = (props) => {
     }
 
 
-    return (<form className="create-Post-Form" onSubmit={ async (event) => {
+    return (<form className="create-post-form" onSubmit={ async (event) => {
        
         onSubmitHandler(event);
         }}>

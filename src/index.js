@@ -50,11 +50,12 @@ const App = () => {
 
 
         </div>
+        <h2 className='logo'>Strangers' Things</h2>
       <div id = "main-section">
       <Route path = "/Login">
         <LogIn setToken = {setToken} setUser = {setUser} reloadItem = {reloadItem} setReloadItem = {setReloadItem}></LogIn>
         <div>Not a user? Register Below: </div>
-        <Register setToken={setToken} reloadItem = {reloadItem} setReloadItem = {reloadItem}></Register>
+        <Register setToken={setToken} reloadItem = {reloadItem} setReloadItem = {setReloadItem}></Register>
         </Route>
         <Route path = "/Posts">
         <Posts posts = {posts} token = {token} setPosts = {setPosts} reloadItem = {reloadItem} setReloadItem = {setReloadItem}></Posts>
