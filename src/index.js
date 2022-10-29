@@ -22,6 +22,14 @@ const App = () => {
     }
     setPosts(posts_value.reverse());};
     console.log("got to getPosts() call");
+    const getUser = async (token) => {
+      const {error, userResponse} = await fetchUser(token);
+      if (error) {
+        console.error(error);
+      }
+      setUser(userResponse);
+    }
+    getUser(token);
     getPosts(token);
   },[reloadItem])
   //  x make the nav bar then make the rest of the UI.
@@ -53,6 +61,7 @@ const App = () => {
           { token ? <>
           <Home guest = {user}></Home>
           <aside><CreatePostForm token = {token} setPosts = {setPosts} posts = {posts} reloadItem = {reloadItem} setReloadItem = {setReloadItem}></CreatePostForm></aside> </>: null}
+          // placeholder for Messages and specific user info //
           <Posts posts = {posts} token = {token} setPosts = {setPosts} reloadItem = {reloadItem} setReloadItem = {setReloadItem}></Posts>
         </Route>
     </div>

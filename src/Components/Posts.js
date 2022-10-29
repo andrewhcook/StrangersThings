@@ -1,7 +1,7 @@
-import { DeletePost } from "../api/Requests";
+import React, {useState, useEffect} from 'react';
+import { DeletePost, SendMessage } from "../api/Requests";
 
-const post = (itemInfo, token, reloadItem, setReloadItem) => {
-
+const post = (itemInfo, token, reloadItem, setReloadItem, message, setMessage) => {
     return itemInfo.isAuthor ?  <><div className="post">
     <div className="post-item"> Post: {itemInfo.title}</div>
     <div className="post-item">Author: {itemInfo.author.username} (You)</div>
@@ -17,7 +17,9 @@ const post = (itemInfo, token, reloadItem, setReloadItem) => {
         <div className="post-item">Price: {itemInfo.price}</div>
         <div className="post-item">Location: {itemInfo.location}</div>
         <div className= "post-item description">Description: {itemInfo.description}</div>
-        <div></div>
+        {token ? <form onSubmit = {async () => {SendMessage(token,itemInfo._id, message);
+        setReloadItem(!reloadItem);}}>
+            <input type = "text" onChange = {()=> {setMessage(message)}}></input> <button > Send Message </button> </form>: null}
     </div> </>
     }
 
@@ -25,7 +27,7 @@ const post = (itemInfo, token, reloadItem, setReloadItem) => {
 const Posts =  (props) => {
 
 
-    
+    const [message, setMessage] = useState("");
     const response = props.posts;
     const token = props.token;
     const reloadItem = props.reloadItem;
@@ -33,7 +35,7 @@ const Posts =  (props) => {
     console.log(response);
     
     return <div className="posts"> {
-        response.map((item)=> {return post(item, token, reloadItem, setReloadItem)})
+        response.map((item)=> {return post(item, token, reloadItem, setReloadItem, message, setMessage)})
     }</div>
 
 

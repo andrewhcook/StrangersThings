@@ -177,3 +177,8 @@ export const DeletePost = async (token, POST_ID) => {
   await apiCall(`posts/${POST_ID}`, {token:token, method: "DELETE"});
    
 }
+
+export const SendMessage = async (token, POST_ID, message) => {
+  console.log("SendMessage() called");
+  await apiCall(`posts/${POST_ID}/messages`, {token: token, body:message})
+}
