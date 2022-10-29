@@ -29,7 +29,7 @@ const post = (itemInfo, token, reloadItem, setReloadItem, message, setMessage) =
 const searchForm = (searchTerm, setSearchTerm) => {
     
 
-  return <input  type="text"  value = {searchTerm}  onChange = {(event)=> {
+  return <input  type="text" placeholder='Search'  value = {searchTerm}  onChange = {(event)=> {
     setSearchTerm(event.target.value);}}></input>
 }
 

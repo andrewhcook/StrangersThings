@@ -21,15 +21,17 @@ const App = () => {
       console.error(error);
     }
     setPosts(posts_value.reverse());};
-    console.log("got to getPosts() call");
     const getUser = async (token) => {
+      console.log("got to getUser() call");
       const {error, userResponse} = await fetchUser(token);
+      console.log("userResponse:", userResponse);
       if (error) {
         console.error(error);
       }
       setUser(userResponse);
-    }
+    };
     getUser(token);
+    console.log("user:", user);
     getPosts(token);
   },[reloadItem])
   //  x make the nav bar then make the rest of the UI.
@@ -50,9 +52,9 @@ const App = () => {
         </div>
       <div id = "main-section">
       <Route path = "/Login">
-        <LogIn setToken = {setToken} setUser = {setUser}></LogIn>
+        <LogIn setToken = {setToken} setUser = {setUser} reloadItem = {reloadItem} setReloadItem = {setReloadItem}></LogIn>
         <div>Not a user? Register Below: </div>
-        <Register setToken={setToken}></Register>
+        <Register setToken={setToken} reloadItem = {reloadItem} setReloadItem = {reloadItem}></Register>
         </Route>
         <Route path = "/Posts">
         <Posts posts = {posts} token = {token} setPosts = {setPosts} reloadItem = {reloadItem} setReloadItem = {setReloadItem}></Posts>

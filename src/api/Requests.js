@@ -149,16 +149,17 @@ export const fetchUser = async (token) => {
   try {
     console.log("fetchUser() called");
     const {success, error, data} = await apiCall('users/me', {token:token});
+    console.log("fetchUser() data", data);
     if (success) {
       return {
         error: null,
-        user: data.user,
+        userResponse: data,
         mesage: data.message
       }
     } else {
       return {
         error: error.message,
-        post: null,
+        userResponse: null,
         message: null
       }
     }
@@ -166,7 +167,7 @@ export const fetchUser = async (token) => {
     console.error(error);
     return {
       error: "error in FetchUser() call",
-      post: null,
+      userResponse: null,
       message: null
     }
   }

@@ -3,7 +3,8 @@ import { registerUser} from "../api/Requests";
 
 
 
-const Register = ({setToken}) => {
+const Register = (props) => {
+    const {setToken, reloadItem, setReloadItem} = props;
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
@@ -13,6 +14,7 @@ const Register = ({setToken}) => {
         const {error, token, message} = await registerUser(username, password);
         setToken(token);
         window.localStorage.setItem('token', token);
+        setReloadItem(!reloadItem);
     }
 
 

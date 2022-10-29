@@ -3,7 +3,7 @@ import React, {useState} from 'react'
 import { logInUser, fetchUser} from "../api/Requests";
 
 const LogIn = (props) => {
-    const {setToken, setUser} = props
+    const {setToken, setUser, reloadItem, setReloadItem} = props
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
@@ -22,6 +22,7 @@ const LogIn = (props) => {
             setUser(user); 
           };
           getUser();
+          setReloadItem(!reloadItem);
     }
 
 //fix this form
