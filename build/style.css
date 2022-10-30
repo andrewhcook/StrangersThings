@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Frijole&family=Kanit:wght@200&family=Roboto+Mono:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&display=swap');
+
+body {
+    display: flex;
+    background-color: #78898b;
+    
+}
+
+.posts {
+    
+    width: 60%;
+}
+
+.post {
+    
+    font-size:20pt;
+    border: 5px solid #8b8478;
+    margin: 15px;
+    background-color: #8b7a78;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.post-item {
+    border: 4px solid #78898b;
+    margin: 5px
+}
+
+.description{ 
+    font-size: 12pt ;
+}
+.create-post-form {
+    border: 10px solid #78808b;
+    float: right;
+    background-color: #8b7a78;
+}
+#nav-bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border: 4px solid #788b7a
+}
+.welcome-home {
+    float: center;
+}
+.post {font-size: 12pt;}
+
+.messages {
+    background-color: #8b7a78;
+    
+}
+
+.message-inbox {
+    font-size: 12pt;
+    border: 3px solid #484c41;
+    background-color: #8b7a78;
+}
+
+.welcome-header {
+    font-size: 22pt;
+    font-family: "Roboto Mono", monospace;
+}
+
+.welcome-home {
+    font-size: 14pt;
+    font-family: 'Roboto Mono', monospace;
+}
+
+.indi-message-in-inbox {
+    border: 1px solid #a6a6a6;
+    margin: 2px;
+    font-family: 'Kanit', sans-serif;
+}
+
+.welcome-header {
+    float: center
+}
+
+.logo {
+    text-align: center;
+    font-family: 'Frijole', cursive;
+    font-size: 36px;
+}
+
+.hand-holder {
+    font-size: 12pt;
+    font-family: 'Kanit', sans-serif;
+}
