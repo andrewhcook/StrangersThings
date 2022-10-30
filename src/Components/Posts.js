@@ -42,7 +42,7 @@ const Posts =  (props) => {
     const token = props.token;
     const reloadItem = props.reloadItem;
     const setReloadItem = props.setReloadItem;
-    console.log(response);
+    //console.log(response);
 
     const [searchTerm, setSearchTerm] = useState("");
 

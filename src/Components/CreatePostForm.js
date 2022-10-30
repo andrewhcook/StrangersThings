@@ -10,17 +10,17 @@ const CreatePostForm = (props) => {
     const [description, setDescription] = useState("");
     const[title, setTitle] = useState("");
     useEffect(()=> {
-        console.log("title", title);
+       // console.log("title", title);
         setPostSubmission({title: title, location:location,willDeliver:willDeliver, price: price, description:description}); 
     },[location, willDeliver,price,description,title])
     const onSubmitHandler = async (event) => {
        // event.preventDefault();
        event.preventDefault();
-       console.log("onSubmitHandler() called in CreatePostForm");
+      // console.log("onSubmitHandler() called in CreatePostForm");
        
-       console.log("postSubmission in onSubmitHandler() in CreatePostForm before CreatePost() call", postSubmission);
+      // console.log("postSubmission in onSubmitHandler() in CreatePostForm before CreatePost() call", postSubmission);
        const {error, post, message} = await CreatePost(token,postSubmission);
-       console.log("new post", post);
+      // console.log("new post", post);
        setReloadItem(!reloadItem);
       /*  const new_posts_value = posts.push(post);
        setPosts(new_posts_value);   */
@@ -60,12 +60,14 @@ const CreatePostForm = (props) => {
             
         </div>
         <div className="field">
-            <label>Will Deliver</label>
+            <label>Will Deliver: </label>
+            Yes
             <input
             type = "checkbox"
             label = "Will Deliver"
             onChange = {() => {setWillDeliver(true)}}
             /> 
+            No
             <input
             type = "checkbox"
             label = "Can't or Won't Deliver"

@@ -22,16 +22,16 @@ const App = () => {
     }
     setPosts(posts_value.reverse());};
     const getUser = async (token) => {
-      console.log("got to getUser() call");
+     // console.log("got to getUser() call");
       const {error, userResponse} = await fetchUser(token);
-      console.log("userResponse:", userResponse);
+      //console.log("userResponse:", userResponse);
       if (error) {
         console.error(error);
       }
       setUser(userResponse);
     };
     getUser(token);
-    console.log("user:", user);
+    //console.log("user:", user);
     getPosts(token);
   },[reloadItem])
   //  x make the nav bar then make the rest of the UI.
@@ -50,7 +50,7 @@ const App = () => {
 
 
         </div>
-        <h2 className='logo'>Strangers' Things</h2>
+        <h2 className='logo'>Strangers' Things <div className="hand-holder">View posts of items for sale in "Posts" or "Home" links above <div className='secondary-hand-holder'> To post your own item for sale, login and create your own listing by using "Create Post Form" on the right side of Home page</div></div></h2>
       <div id = "main-section">
       <Route path = "/Login">
         <LogIn setToken = {setToken} setUser = {setUser} reloadItem = {reloadItem} setReloadItem = {setReloadItem}></LogIn>

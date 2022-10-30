@@ -8,13 +8,13 @@ const LogIn = (props) => {
     const [password, setPassword] = useState("");
 
     const onSubmitHandler = async (event) => {
-        console.log("onSubmitHandler() in Login called");
+       // console.log("onSubmitHandler() in Login called");
         event.preventDefault();
         const {error, token, message} = await logInUser(username, password);
         setToken(token);
         window.localStorage.setItem('token', token);
         const getUser = async () => {
-            console.log("getUser() called");
+          //  console.log("getUser() called");
             const {error, user} = await fetchUser(token);
             if (error) {
               console.error(error);

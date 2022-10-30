@@ -1,6 +1,4 @@
 
-
-
 const BASEURL = "https://strangers-things.herokuapp.com/api/2207-FTB-ET-WEB-PT";
 
 
@@ -14,7 +12,7 @@ const makeHeaders = (token) => {
   if (token) {
     headers['Authorization'] = `Bearer ${token}`;
   }
-  console.log(headers);
+//  console.log(headers);
   return headers;
 };
 
@@ -30,7 +28,7 @@ export const apiCall = async (endpoint, defaultOptions= {}) => {
     options.body = JSON.stringify(body);
   }
   console.log("body in apiCall", options.body);
-    console.log("options in apiCall", options);
+  //  console.log("options in apiCall", options);
     const response = await fetch(`${BASEURL}/${endpoint}`, options);
     const result = await response.json();
     return result;
@@ -38,15 +36,15 @@ export const apiCall = async (endpoint, defaultOptions= {}) => {
 
 export const fetchPosts = async (token = null)=> {
   const {success, error, data} = await apiCall('posts', {token:token, method:"GET"});
-  console.log("data: ", data.posts);
+//  console.log("data: ", data.posts);
   if (success) {
-    console.log("success! in fetchPosts()");
+   // console.log("success! in fetchPosts()");
     return {
       error: null,
       posts_value: data.posts
     }
   } else {
-    console.log("failure :( in fetchPosts()")
+  //  console.log("failure :( in fetchPosts()")
     return {
       error: "Failed to Load apiCall in fetchPosts",
       posts_value: []
@@ -59,14 +57,14 @@ export const registerUser = async (username, password) => {
     const {success, error, data} = await apiCall('users/register', {token: null, method: "Post", body: {user: {username: username,
     password: password}}} );
     if (success) {
-      console.log(username, data.token)
+  //    console.log(username, data.token)
       return {
         error: null,
         token: data.token,
         mesage: data.message
       }
     } else {
-      console.log("no success in registerUser()", error);
+     // console.log("no success in registerUser()", error);
       return {
         error: error.message,
         token: null,
@@ -88,7 +86,7 @@ export const logInUser = async (username, password) => {
     const {success, error, data} = await apiCall('users/login', {token: null, method: "Post", body: {user: {username: username,
     password: password}}} );
     if (success) {
-      console.log(username, data.token)
+     // console.log(username, data.token)
       return {
         error: null,
         token: data.token,
@@ -96,7 +94,7 @@ export const logInUser = async (username, password) => {
       }
     } else {
       alert("Incorrect User Credentials");
-      console.log("no success in registerUser()", error);
+     // console.log("no success in registerUser()", error);
       return {
         error: error.message,
         token: null,
@@ -129,7 +127,7 @@ export const CreatePost = async (token, post) => {
         mesage: data.message
       }
     } else {
-      console.log("error in CreatePost", error.message);
+     // console.log("error in CreatePost", error.message);
       return {
         error: error.message,
         post: null,
@@ -148,9 +146,9 @@ export const CreatePost = async (token, post) => {
 
 export const fetchUser = async (token) => {
   try {
-    console.log("fetchUser() called");
+  //  console.log("fetchUser() called");
     const {success, error, data} = await apiCall('users/me', {token:token});
-    console.log("fetchUser() data", data);
+  //  console.log("fetchUser() data", data);
     if (success) {
       return {
         error: null,
@@ -175,14 +173,14 @@ export const fetchUser = async (token) => {
 }
 
 export const DeletePost = async (token, POST_ID) => {
-  console.log("DeletePost() called");
+ // console.log("DeletePost() called");
   await apiCall(`posts/${POST_ID}`, {token:token, method: "DELETE"});
    
 }
 
 export const SendMessage = async (token, POST_ID, content) => {
-  console.log("SendMessage() called");
-  console.log(content);
+  //console.log("SendMessage() called");
+  //console.log(content);
   const {success, error, data} = await apiCall(`posts/${POST_ID}/messages`, {token: token, method: "POST", body: {message:{ content: content}}})
   if (error) {
     console.log(error);
