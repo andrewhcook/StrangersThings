@@ -66,9 +66,15 @@ const Posts =  (props) => {
         }
         return false
       }
-      
+      function truthytest(searchValue, posts){
+        if (searchValue === "") {return true}
+        if (searchValue !== "" && !posts) {
+          return false
+        }
+        return true
+      }
       const filteredPosts = response.filter(post => postMatches(post, searchTerm));
-    return  (searchTerm === "" && filteredPosts) ? <><div> {searchForm(searchTerm,setSearchTerm)} </div><div className='posts'> {filteredPosts.map((item) => { return post(item, token, reloadItem, setReloadItem, message, setMessage); })}</div></>: <><div> {searchForm(searchTerm, setSearchTerm)} </div><div className = "no-results-error">No Search Results Found</div></>
+    return  truthytest(searchTerm, filteredPosts) ? <><div> {searchForm(searchTerm,setSearchTerm)} </div><div className='posts'> {filteredPosts.map((item) => { return post(item, token, reloadItem, setReloadItem, message, setMessage); })}</div></>: <><div> {searchForm(searchTerm, setSearchTerm)} </div><div className = "no-results-error">No Search Results Found</div></>
 
 
 }
