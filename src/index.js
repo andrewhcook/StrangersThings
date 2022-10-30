@@ -64,7 +64,6 @@ const App = () => {
           { token ? <>
           <Home guest = {user}></Home>
           <aside><CreatePostForm token = {token} setPosts = {setPosts} posts = {posts} reloadItem = {reloadItem} setReloadItem = {setReloadItem}></CreatePostForm></aside> </>: null}
-          // placeholder for Messages and specific user info //
           <Posts posts = {posts} token = {token} setPosts = {setPosts} reloadItem = {reloadItem} setReloadItem = {setReloadItem}></Posts>
         </Route>
     </div>
